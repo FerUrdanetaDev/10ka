@@ -89,6 +89,7 @@ defineProps(['isMenuOpen'])
 defineEmits(['toggleMenu'])
 </script>
 
+
 <style scoped>
 /* TU CSS ORIGINAL SIN UNA SOLA LÍNEA CAMBIADA */
 .cyber-right-enter-active, .cyber-right-leave-active {
