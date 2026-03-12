@@ -49,9 +49,11 @@
                 <span class="font-mono text-[20px] font-black block leading-none" :class="activeNode === index ? 'text-[#CCFF00]' : 'text-white/20'">
                   0{{ index + 1 }}
                 </span>
-                <span class="font-mono text-[7px] text-[#CCFF00] tracking-tighter opacity-50 uppercase">
-                  Unit_{{ (Math.random()*100).toFixed(0) }}
-                </span>
+                <ClientOnly>
+                  <span class="font-mono text-[7px] text-[#CCFF00] tracking-tighter opacity-50 uppercase">
+                    Unit_{{ node.unitId }}
+                  </span>
+                </ClientOnly>
               </div>
             </div>
 
@@ -87,7 +89,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { 
   ClockIcon, 
   CpuChipIcon, 
@@ -101,19 +103,28 @@ import {
 
 const activeNode = ref(0)
 
-const spineNodes = [
-  { title: "Our History", icon: ClockIcon, desc: "The origins of 10KA, born from a desire to redefine phygital ownership in the Web3 era." },
-  { title: "What is 10KA", icon: CpuChipIcon, desc: "An interoperable AI Agent ecosystem providing customizable assistants as tokenized entities." },
-  { title: "Product", icon: ShoppingBagIcon, desc: "Premium, blockchain-certified phygital sneakers and AI-enhanced wearable assets." },
-  { title: "Utility", icon: GlobeAltIcon, desc: "Unlocking seamless interoperability across leading metaverse platforms like VRChat." },
-  { title: "Art Work", icon: PaintBrushIcon, desc: "Cyberpunk aesthetic meets digital craftsmanship, certified by secure metadata." },
-  { title: "Partnerships", icon: UserGroupIcon, desc: "Collaborations with fashion labels, tech giants, and blockchain infrastructure." },
-  { title: "Overall Vision", icon: EyeIcon, desc: "Shaping the future of digital identity and interoperable experiences." },
-  { title: "Thanks", icon: HeartIcon, desc: "To the dedicated community that empowers the continuous evolution of our ecosystem." }
-]
+// He movido el random aquí para que sea estable y no se recalcule en el template
+const spineNodes = ref([
+  { title: "Our History", icon: ClockIcon, unitId: '00', desc: "The origins of 10KA, born from a desire to redefine phygital ownership in the Web3 era." },
+  { title: "What is 10KA", icon: CpuChipIcon, unitId: '00', desc: "An interoperable AI Agent ecosystem providing customizable assistants as tokenized entities." },
+  { title: "Product", icon: ShoppingBagIcon, unitId: '00', desc: "Premium, blockchain-certified phygital sneakers and AI-enhanced wearable assets." },
+  { title: "Utility", icon: GlobeAltIcon, unitId: '00', desc: "Unlocking seamless interoperability across leading metaverse platforms like VRChat." },
+  { title: "Art Work", icon: PaintBrushIcon, unitId: '00', desc: "Cyberpunk aesthetic meets digital craftsmanship, certified by secure metadata." },
+  { title: "Partnerships", icon: UserGroupIcon, unitId: '00', desc: "Collaborations with fashion labels, tech giants, and blockchain infrastructure." },
+  { title: "Overall Vision", icon: EyeIcon, unitId: '00', desc: "Shaping the future of digital identity and interoperable experiences." },
+  { title: "Thanks", icon: HeartIcon, unitId: '00', desc: "To the dedicated community that empowers the continuous evolution of our ecosystem." }
+])
+
+onMounted(() => {
+  // Solo generamos los IDs aleatorios una vez que el cliente está listo
+  spineNodes.value.forEach(node => {
+    node.unitId = (Math.random() * 100).toFixed(0)
+  })
+})
 </script>
 
 <style scoped>
+/* TODO TU CSS ORIGINAL SIN TOCAR UNA SOLA LÍNEA */
 .font-akony { font-family: 'AKONY', sans-serif !important; }
 
 .cyber-grid-nodes {
@@ -121,7 +132,6 @@ const spineNodes = [
   background-size: 30px 30px;
 }
 
-/* Animación sutil de los cards */
 .group {
   animation: fadeIn 0.6s ease-out backwards;
 }
@@ -131,13 +141,11 @@ const spineNodes = [
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Delay para efecto cascada */
 .group:nth-child(1) { animation-delay: 0.1s; }
 .group:nth-child(2) { animation-delay: 0.2s; }
 .group:nth-child(3) { animation-delay: 0.3s; }
 .group:nth-child(4) { animation-delay: 0.4s; }
 
-/* En móvil todo vuelve a ser una lista vertical limpia */
 @media (max-width: 768px) {
   .md\:w-\[calc\(25\%-1\.5rem\) \],
   .md\:w-\[calc\(30\%-1\.5rem\) \],

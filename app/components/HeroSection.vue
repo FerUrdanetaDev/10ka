@@ -23,9 +23,13 @@
               <span class="w-1.5 h-1.5 bg-[#CCFF00] animate-ping"></span>
               <p>> NEURAL_LINK: ESTABLISHED</p>
             </div>
-            <p class="text-white/40">> UPTIME: {{ uptime }}S</p>
+            <ClientOnly>
+              <p class="text-white/40">> UPTIME: {{ uptime }}S</p>
+            </ClientOnly>
             <div class="space-y-1">
-              <div class="flex justify-between text-[8px]"><span>SYNC</span><span>{{ cpuLoad }}%</span></div>
+              <ClientOnly>
+                <div class="flex justify-between text-[8px]"><span>SYNC</span><span>{{ cpuLoad }}%</span></div>
+              </ClientOnly>
               <div class="w-32 h-1 bg-white/10 overflow-hidden">
                 <div class="h-full bg-[#CCFF00] animate-loading-bar"></div>
               </div>
@@ -38,20 +42,21 @@
         </div>
 
         <div class="absolute right-0 top-0 opacity-60 text-right font-mono">
-          <div class="text-[10px] text-cyan-400 space-y-1">
-            <p>LAT: {{ (10.6667 + Math.random()*0.001).toFixed(4) }}</p>
-            <p>LONG: {{ (-71.6122 + Math.random()*0.001).toFixed(4) }}</p>
-            <p class="text-white/40">NODE: 10KA_SYS_OVERRIDE</p>
-            <div class="flex justify-end gap-1 mt-2">
-              <div v-for="i in 5" :key="i" class="w-1 h-3 bg-cyan-500/30" :class="{'animate-pulse': i % 2 === 0}"></div>
+          <ClientOnly>
+            <div class="text-[10px] text-cyan-400 space-y-1">
+              <p>LAT: {{ (10.6667 + Math.random()*0.001).toFixed(4) }}</p>
+              <p>LONG: {{ (-71.6122 + Math.random()*0.001).toFixed(4) }}</p>
+              <p class="text-white/40">NODE: 10KA_SYS_OVERRIDE</p>
+              <div class="flex justify-end gap-1 mt-2">
+                <div v-for="i in 5" :key="i" class="w-1 h-3 bg-cyan-500/30" :class="{'animate-pulse': i % 2 === 0}"></div>
+              </div>
             </div>
-          </div>
+          </ClientOnly>
         </div>
       </div>
     </div>
 
     <div class="relative z-10 flex-grow flex flex-col justify-between w-full max-w-[1600px] mx-auto px-6 md:px-12 py-10">
-      
       <div class="flex flex-col items-center text-center mt-12 md:mt-20 relative group">
         <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-[1px] bg-gradient-to-r from-transparent via-[#CCFF00] to-transparent opacity-50"></div>
         
@@ -94,13 +99,8 @@
             <div class="w-[300px] h-[300px] border border-[#CCFF00]/20 rounded-full animate-ping delay-700"></div>
             <div class="absolute w-[500px] h-[500px] border border-cyan-500/10 rounded-full animate-reverse-spin"></div>
           </div>
-
           <div class="absolute left-[15%] top-0 w-16 h-16 border-l-2 border-t-2 border-[#CCFF00]/40 animate-pulse"></div>
-          <img 
-            src="/hero-background.png" 
-            alt="10KA Agents" 
-            class="h-[30vh] md:h-[38vh] w-auto object-contain object-bottom opacity-90 brightness-110 animate-float"
-          />
+          <img src="/hero-background.png" alt="10KA Agents" class="h-[30vh] md:h-[38vh] w-auto object-contain object-bottom opacity-90 brightness-110 animate-float" />
         </div>
 
         <aside class="absolute left-0 bottom-10 hidden lg:flex flex-col items-center gap-6 group">
@@ -131,16 +131,20 @@
           </div>
           <span class="text-[10px] text-[#CCFF00] font-black tracking-[0.5em]">CORE STABLE</span>
         </div>
-        <div class="hidden md:flex gap-6 text-[9px] text-white/30 tracking-[0.3em]">
-          <span>CPU: {{ cpuLoad }}%</span>
-          <span>NET: {{ connectionType }}</span>
-          <span class="text-[#CCFF00]/50 uppercase">LOC: {{ userCity }}, {{ userCountry }}</span>
-        </div>
+        <ClientOnly>
+          <div class="hidden md:flex gap-6 text-[9px] text-white/30 tracking-[0.3em]">
+            <span>CPU: {{ cpuLoad }}%</span>
+            <span>NET: {{ connectionType }}</span>
+            <span class="text-[#CCFF00]/50 uppercase">LOC: {{ userCity }}, {{ userCountry }}</span>
+          </div>
+        </ClientOnly>
       </div>
       
-      <div class="text-[9px] text-white/40 tracking-[0.4em] hidden sm:block italic">
-        SIGNAL: {{ (Math.random() * 100).toFixed(0) }}% // RSA_READY
-      </div>
+      <ClientOnly>
+        <div class="text-[9px] text-white/40 tracking-[0.4em] hidden sm:block italic">
+          SIGNAL: {{ (Math.random() * 100).toFixed(0) }}% // RSA_READY
+        </div>
+      </ClientOnly>
     </div>
   </section>
 </template>
@@ -175,6 +179,7 @@ onMounted(() => {
 </script>
 
 <style>
+/* He mantenido tus fuentes exactamente igual */
 @font-face {
   font-family: 'AKONY';
   src: url('/fonts/AKONY.otf') format('opentype');
@@ -186,10 +191,9 @@ h1.hero-title, h1.hero-title *, .font-akony {
 </style>
 
 <style scoped>
+/* TODO TU CSS ORIGINAL SIN CAMBIOS */
 .hero-title { font-size: clamp(2.2rem, 6vw, 3rem); }
 .glow-soft { text-shadow: 0 0 12px rgba(204, 255, 0, 0.25); }
-
-/* CORRECCIÓN BORDES AGENTS */
 .cyber-button-border {
   clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0% 30%);
   background: #CCFF00;
@@ -197,15 +201,10 @@ h1.hero-title, h1.hero-title *, .font-akony {
   position: relative;
 }
 .cyber-button-border::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: black;
+  content: ""; position: absolute; inset: 1px; background: black;
   clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0% 30%);
   z-index: 1;
 }
-
-/* MALLA 80px */
 .cyber-grid-3d {
   background-image: linear-gradient(rgba(204, 255, 0, 0.15) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(204, 255, 0, 0.15) 1px, transparent 1px);
@@ -214,40 +213,40 @@ h1.hero-title, h1.hero-title *, .font-akony {
   transform-origin: top;
   animation: grid-travel 30s linear infinite;
 }
-
 .bg-cyber-grid-static {
   background-image: linear-gradient(rgba(204, 255, 0, 0.05) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(204, 255, 0, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
 }
-
 @keyframes breath { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.7; } }
 .animate-breath { animation: breath 3s ease-in-out infinite; }
-
 @keyframes loading-bar { 0% { width: 0%; } 100% { width: 100%; } }
 .animate-loading-bar { animation: loading-bar 3s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); }
-
 @keyframes reverse-spin { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 .animate-reverse-spin { animation: reverse-spin 20s linear infinite; }
-
 @keyframes h-scan { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .animate-h-scan { animation: h-scan 4s linear infinite; }
-
 .cyber-cut-btn { clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0% 30%); }
 .stroke-text-thin { -webkit-text-stroke: 1px rgba(204, 255, 0, 0.5); color: transparent; }
 .scanlines { background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px); background-size: 100% 3px; }
-
 .glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; }
 .hero-title:hover .glitch-text::before { color: #ff00ff; z-index: -1; animation: glitch-off 0.2s infinite linear alternate-reverse; }
 .hero-title:hover .glitch-text::after { color: #00ffff; z-index: -2; animation: glitch-off 0.2s infinite linear alternate; }
 
 @keyframes grid-travel { from { background-position: 0 0; } to { background-position: 0 100%; } }
+
 @keyframes glitch-off { 0% { transform: translate(-2px, 2px); } 100% { transform: translate(2px, -2px); } }
+
 @keyframes v-scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
 @keyframes bounce-x { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+
 .animate-bounce-x { animation: bounce-x 1s infinite; }
 
 .animate-v-scan { animation: v-scan 4s linear infinite; }
+
+
 .animate-v-scan-delayed { animation: v-scan 7s linear infinite 1.5s; }
+
 .animate-pulse-slow { animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 </style>

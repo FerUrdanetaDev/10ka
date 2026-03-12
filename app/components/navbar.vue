@@ -29,53 +29,57 @@
           <span class="text-black text-[13px] font-black tracking-[0.01rem]">WHITELIST</span>
         </div>
 
-        <div class="lg:hidden flex items-center justify-center h-full px-6 border-l border-white/5">
-          <button @click="$emit('toggleMenu')" class="flex items-center outline-none z-[160]">
-            <div class="relative w-8 h-8 flex flex-col justify-center items-end gap-1.5">
-              <span :class="['h-[2px] bg-[#CCFF00] transition-all duration-300', isMenuOpen ? 'w-8 rotate-45 translate-y-[4px]' : 'w-6']"></span>
-              <span :class="['h-[2px] bg-[#CCFF00] transition-all duration-300', isMenuOpen ? 'w-8 -rotate-45 -translate-y-[4px]' : 'w-8']"></span>
-            </div>
-          </button>
-        </div>
+        <ClientOnly>
+          <div class="lg:hidden flex items-center justify-center h-full px-6 border-l border-white/5">
+            <button @click="$emit('toggleMenu')" class="flex items-center outline-none z-[160]">
+              <div class="relative w-8 h-8 flex flex-col justify-center items-end gap-1.5">
+                <span :class="['h-[2px] bg-[#CCFF00] transition-all duration-300', isMenuOpen ? 'w-8 rotate-45 translate-y-[4px]' : 'w-6']"></span>
+                <span :class="['h-[2px] bg-[#CCFF00] transition-all duration-300', isMenuOpen ? 'w-8 -rotate-45 -translate-y-[4px]' : 'w-8']"></span>
+              </div>
+            </button>
+          </div>
+        </ClientOnly>
 
       </div>
     </div>
 
-    <Transition name="cyber-right">
-      <div v-if="isMenuOpen" class="fixed inset-0 z-[150] bg-black flex flex-col items-end shadow-[-20px_0_60px_rgba(0,0,0,0.8)]">
-        <div class="absolute inset-0 pointer-events-none scanlines opacity-20"></div>
-        <div class="absolute inset-0 bg-gradient-to-l from-[#CCFF00]/5 to-transparent"></div>
-        <div class="absolute top-0 right-0 w-full h-[1px] bg-[#CCFF00] shadow-[0_0_20px_#CCFF00]"></div>
-        
-        <div class="relative w-full md:w-2/3 h-full flex flex-col justify-between p-10 md:p-20">
-          <div class="mt-12 text-right">
-            <p class="text-[10px] text-[#CCFF00] tracking-[0.8em] opacity-70 mb-2">ACCESS_GRANTED // V3.0</p>
-            <div class="h-[1px] w-24 bg-[#CCFF00] ml-auto"></div>
-          </div>
-
-          <nav class="flex flex-col items-end gap-2">
-            <NuxtLink v-for="link in ['TERMINAL', 'ECOSYSTEM', 'STAKING', 'DOCS']" :key="link" to="#"
-              class="group flex items-center gap-6 py-2 text-right">
-              <ArrowUpRightIcon class="w-10 h-10 md:w-14 md:h-14 text-[#CCFF00] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-              <span class="text-5xl md:text-8xl font-black tracking-tighter text-white group-hover:text-[#CCFF00] transition-colors uppercase">
-                {{ link }}
-              </span>
-            </NuxtLink>
-          </nav>
+    <ClientOnly>
+      <Transition name="cyber-right">
+        <div v-if="isMenuOpen" class="fixed inset-0 z-[150] bg-black flex flex-col items-end shadow-[-20px_0_60px_rgba(0,0,0,0.8)]">
+          <div class="absolute inset-0 pointer-events-none scanlines opacity-20"></div>
+          <div class="absolute inset-0 bg-gradient-to-l from-[#CCFF00]/5 to-transparent"></div>
+          <div class="absolute top-0 right-0 w-full h-[1px] bg-[#CCFF00] shadow-[0_0_20px_#CCFF00]"></div>
           
-          <div class="flex flex-col gap-10 border-t border-[#CCFF00]/10 pt-10">
-            <button class="bg-[#CCFF00] text-black py-5 font-black tracking-[.4em] text-center hover:bg-white transition-all shadow-[0_10px_30px_rgba(204,255,0,0.1)] uppercase">
-              JOIN_WHITELIST
-            </button>
-            <div class="flex items-center gap-10 justify-end text-white/50 text-sm">
-              <a href="#" class="hover:text-[#CCFF00] transition-all tracking-widest">DISCORD</a>
-              <a href="#" class="hover:text-[#CCFF00] transition-all tracking-widest">INSTAGRAM</a>
-              <a href="#" class="hover:text-[#CCFF00] transition-all text-2xl font-bold">𝕏</a>
+          <div class="relative w-full md:w-2/3 h-full flex flex-col justify-between p-10 md:p-20">
+            <div class="mt-12 text-right">
+              <p class="text-[10px] text-[#CCFF00] tracking-[0.8em] opacity-70 mb-2">ACCESS_GRANTED // V3.0</p>
+              <div class="h-[1px] w-24 bg-[#CCFF00] ml-auto"></div>
+            </div>
+
+            <nav class="flex flex-col items-end gap-2">
+              <NuxtLink v-for="link in ['TERMINAL', 'ECOSYSTEM', 'STAKING', 'DOCS']" :key="link" to="#"
+                class="group flex items-center gap-6 py-2 text-right">
+                <ArrowUpRightIcon class="w-10 h-10 md:w-14 md:h-14 text-[#CCFF00] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                <span class="text-5xl md:text-8xl font-black tracking-tighter text-white group-hover:text-[#CCFF00] transition-colors uppercase">
+                  {{ link }}
+                </span>
+              </NuxtLink>
+            </nav>
+            
+            <div class="flex flex-col gap-10 border-t border-[#CCFF00]/10 pt-10">
+              <button class="bg-[#CCFF00] text-black py-5 font-black tracking-[.4em] text-center hover:bg-white transition-all shadow-[0_10px_30px_rgba(204,255,0,0.1)] uppercase">
+                JOIN_WHITELIST
+              </button>
+              <div class="flex items-center gap-10 justify-end text-white/50 text-sm">
+                <a href="#" class="hover:text-[#CCFF00] transition-all tracking-widest">DISCORD</a>
+                <a href="#" class="hover:text-[#CCFF00] transition-all tracking-widest">INSTAGRAM</a>
+                <a href="#" class="hover:text-[#CCFF00] transition-all text-2xl font-bold">𝕏</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </Transition>
+      </Transition>
+    </ClientOnly>
   </nav>
 </template>
 
@@ -86,6 +90,7 @@ defineEmits(['toggleMenu'])
 </script>
 
 <style scoped>
+/* TU CSS ORIGINAL SIN UNA SOLA LÍNEA CAMBIADA */
 .cyber-right-enter-active, .cyber-right-leave-active {
   transition: all 0.5s cubic-bezier(0.85, 0, 0.15, 1);
 }

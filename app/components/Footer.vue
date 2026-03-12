@@ -21,7 +21,7 @@
             <input 
               type="email" 
               placeholder="Enter your email address" 
-              class="flex-grow bg-transparent border-b border-white/20 py-3 px-2 text-sm focus:outline-none focus:border-[#CCFF00] transition-colors"
+              class="flex-grow bg-transparent border-b border-white/20 py-3 px-2 text-sm focus:outline-none focus:border-[#CCFF00] transition-colors placeholder:text-white/20"
               required
             />
             <button type="submit" class="relative group">
@@ -32,8 +32,8 @@
           </div>
           
           <div class="flex items-start gap-3 text-left">
-            <input type="checkbox" id="terms" class="mt-1 accent-[#CCFF00]" required />
-            <label for="terms" class="text-[9px] text-white/40 uppercase leading-tight">
+            <input type="checkbox" id="terms" class="mt-1 accent-[#CCFF00] cursor-pointer" required />
+            <label for="terms" class="text-[9px] text-white/40 uppercase leading-tight cursor-pointer hover:text-white transition-colors">
               I would like to receive updates, offers, and exclusive information from 10KA. I confirm that I am 17 years old or older.
             </label>
           </div>
@@ -48,15 +48,17 @@
           <div class="space-y-4">
             <p class="text-[10px] text-[#CCFF00] tracking-[0.4em] uppercase">FIND US ON</p>
             <div class="flex gap-5">
-              <a href="#" class="social-btn" aria-label="X">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </a>
-              <a href="#" class="social-btn" aria-label="Discord">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-              </a>
-              <a href="#" class="social-btn" aria-label="Telegram">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18.717-.962 4.084-1.362 5.441-.168.575-.512.784-.712.802-.444.04-1.008-.293-1.442-.575-.68-.444-1.065-.722-1.725-1.157-.763-.504-.268-.783.167-1.232.114-.118 2.086-1.914 2.124-2.077.005-.02.01-.097-.036-.136-.046-.039-.114-.026-.163-.015-.07.016-1.18.749-3.326 2.196-.314.216-.599.322-.855.316-.281-.006-.823-.153-1.226-.284-.494-.161-.887-.246-.853-.52.017-.143.215-.29.593-.441 2.321-1.011 3.868-1.677 4.641-1.997 2.212-.912 2.67-1.07 2.97-.107l-.01.036z"/></svg>
-              </a>
+              <ClientOnly>
+                <a href="#" class="social-btn" aria-label="X">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="Discord">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="Telegram">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18.717-.962 4.084-1.362 5.441-.168.575-.512.784-.712.802-.444.04-1.008-.293-1.442-.575-.68-.444-1.065-.722-1.725-1.157-.763-.504-.268-.783.167-1.232.114-.118 2.086-1.914 2.124-2.077.005-.02.01-.097-.036-.136-.046-.039-.114-.026-.163-.015-.07.016-1.18.749-3.326 2.196-.314.216-.599.322-.855.316-.281-.006-.823-.153-1.226-.284-.494-.161-.887-.246-.853-.52.017-.143.215-.29.593-.441 2.321-1.011 3.868-1.677 4.641-1.997 2.212-.912 2.67-1.07 2.97-.107l-.01.036z"/></svg>
+                </a>
+              </ClientOnly>
             </div>
           </div>
         </div>
@@ -68,7 +70,7 @@
             </h4>
             <ul class="space-y-2">
               <li v-for="link in links" :key="link.name">
-                <a :href="link.url" class="text-[10px] text-white/40 hover:text-[#CCFF00] transition-colors uppercase">
+                <a :href="link.url" class="text-[10px] text-white/40 hover:text-[#CCFF00] transition-colors uppercase tracking-tight">
                   {{ link.name }}
                 </a>
               </li>
@@ -130,7 +132,6 @@ const handleSubmit = () => {
   background-size: 40px 40px;
 }
 
-/* ESTILO DE LOS ICONOS SOCIALES EN VERDE LIMA */
 .social-btn {
   @apply text-[#CCFF00] p-2 border border-[#CCFF00]/20 hover:border-[#CCFF00] hover:bg-[#CCFF00]/10 transition-all duration-300;
   filter: drop-shadow(0 0 5px rgba(204, 255, 0, 0.3));

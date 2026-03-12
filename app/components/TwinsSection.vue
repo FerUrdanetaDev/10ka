@@ -19,12 +19,14 @@
         
         <div class="lg:col-span-6 flex flex-col order-1 lg:order-2">
           
-          <div class="flex items-end gap-[2px] h-10 mb-8 opacity-80">
-            <div v-for="i in 40" :key="i" 
-                 class="w-[3px] bg-white animate-eq-bar"
-                 :style="{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.05}s` }">
+          <ClientOnly>
+            <div class="flex items-end gap-[2px] h-10 mb-8 opacity-80">
+              <div v-for="i in 40" :key="i" 
+                   class="w-[3px] bg-white animate-eq-bar"
+                   :style="{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.05}s` }">
+              </div>
             </div>
-          </div>
+          </ClientOnly>
 
           <div class="flex items-center gap-4 mb-4">
             <div class="h-[1px] w-12 bg-[#CCFF00]"></div>
@@ -89,23 +91,27 @@
               <div class="absolute inset-0 z-20 pointer-events-none scan-overlay"></div>
             </div>
 
-            <div class="absolute bottom-10 right-10 font-mono text-[9px] text-right space-y-1 z-20">
-              <p class="text-cyan-400">COORD: {{ lat }} S.R.</p>
-              <p class="text-white/40">SECTOR: DATA 3/D.19</p>
-            </div>
+            <ClientOnly>
+              <div class="absolute bottom-10 right-10 font-mono text-[9px] text-right space-y-1 z-20">
+                <p class="text-cyan-400">COORD: {{ lat }} S.R.</p>
+                <p class="text-white/40">SECTOR: DATA 3/D.19</p>
+              </div>
+            </ClientOnly>
           </div>
         </div>
 
       </div>
     </div>
 
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex gap-12 opacity-30 whitespace-nowrap overflow-hidden w-full px-20">
-      <div v-for="i in 4" :key="i" class="flex gap-4 font-mono text-[8px] text-cyan-400">
-        <span>DATA_FLOW_SYNC_ACTIVE [{{ (Math.random()*100).toFixed(0) }}%]</span>
-        <span class="text-white/20">//</span>
-        <span class="text-[#CCFF00]">RSA_ENCRYPTION_ENABLED</span>
+    <ClientOnly>
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex gap-12 opacity-30 whitespace-nowrap overflow-hidden w-full px-20">
+        <div v-for="i in 4" :key="i" class="flex gap-4 font-mono text-[8px] text-cyan-400">
+          <span>DATA_FLOW_SYNC_ACTIVE [{{ dataFlowPercentages[i-1] || '0' }}%]</span>
+          <span class="text-white/20">//</span>
+          <span class="text-[#CCFF00]">RSA_ENCRYPTION_ENABLED</span>
+        </div>
       </div>
-    </div>
+    </ClientOnly>
   </section>
 </template>
 
@@ -113,6 +119,8 @@
 import { ref, onMounted } from 'vue';
 
 const lat = ref('32.122');
+const dataFlowPercentages = ref(['0', '0', '0', '0']);
+
 const features = [
   { title: "Interoperability", desc: "Compatible with leading metaverse platforms (VRChat, Helios)." },
   { title: "Personalization", desc: "Adapt and modify your avatar's bone structure via SDK." },
@@ -121,13 +129,21 @@ const features = [
 ];
 
 onMounted(() => {
-  setInterval(() => {
+  // Inicializar porcentajes aleatorios una sola vez en el cliente
+  dataFlowPercentages.value = dataFlowPercentages.value.map(() => (Math.random() * 100).toFixed(0));
+
+  // Intervalo para las coordenadas
+  const interval = setInterval(() => {
     lat.value = (32.100 + Math.random() * 0.050).toFixed(3);
   }, 1000);
+
+  // Limpieza al desmontar
+  return () => clearInterval(interval);
 });
 </script>
 
 <style scoped>
+/* TU CSS ORIGINAL ESTÁ INTACTO ABAJO */
 .font-akony { font-family: 'AKONY', sans-serif !important; }
 
 .radar-beam {
@@ -156,7 +172,7 @@ onMounted(() => {
 .scan-overlay {
   background: linear-gradient(to bottom, transparent 0%, rgba(204, 255, 0, 0.2) 50%, #CCFF00 50.5%, transparent 51%);
   background-size: 100% 200%;
-
+  animation: scan-v 3s linear infinite;
 }
 
 @keyframes scan-v { 0% { background-position: 0 -100%; } 100% { background-position: 0 100%; } }
